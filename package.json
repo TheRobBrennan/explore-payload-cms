@@ -1,0 +1,14 @@
+{
+  "name": "explore-payload-cms",
+  "version": "0.0.0",
+  "description": "Explore Next.js + Payload CMS",
+  "homepage": "https://github.com/TheRobBrennan/explore-payload-cms#readme",
+  "bugs": {
+    "url": "https://github.com/TheRobBrennan/explore-payload-cms/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheRobBrennan/explore-payload-cms.git"
+  },
+  "author": "Rob Brennan <rob@sploosh.ai>"
+}
