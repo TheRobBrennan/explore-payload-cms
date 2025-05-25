@@ -7,13 +7,16 @@ This project focuses primarily on Next.js and Payload CMS - designed to explore 
 - **Next.js 15** with App Router
 - **Payload CMS** for content management
 - TypeScript support
-- Modern UI components
-- Responsive design
+- GitHub Actions workflows
+- Automated testing with [act CLI](https://github.com/nektos/act)
+- Windsurf rules integration
 
 ## 🛠️ Prerequisites
 
-- Node.js 18.0.0 or later
+- Node.js 20.0.0 or later
 - npm
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/) (required for local workflow testing)
+- [act CLI tool](https://github.com/nektos/act) (for local workflow testing)
 
 ## 🚦 Getting Started
 
@@ -24,8 +27,30 @@ This project focuses primarily on Next.js and Payload CMS - designed to explore 
    cd explore-payload-cms
    ```
 
+## 🧪 Testing Workflows
+
+This project includes GitHub Actions workflows that can be tested locally using the [act CLI tool](https://github.com/nektos/act).
+
+### Available Test Commands
+
+- `npm test` - Run all workflow tests
+- `npm run test:workflows` - Test all workflows
+- `npm run test:workflows:semantic` - Test semantic PR check with minor version bump
+- `npm run test:workflows:semantic:major` - Test semantic PR check with major version bump
+- `npm run test:workflows:semantic:minor` - Test semantic PR check with minor version bump
+- `npm run test:workflows:semantic:patch` - Test semantic PR check with patch version bump
+- `npm run test:workflows:semantic:invalid` - Test semantic PR check with invalid PR title
+- `npm run test:workflows:merge` - Test merge workflow
+
+## 🤖 GitHub Actions
+
+This repository includes the following GitHub Actions workflows:
+
+- **Semantic PR Check**: Validates PR titles against conventional commit messages
+- **Main Merge**: Handles version bumping and changelog generation on merge to main
+
 ## 🙏 Acknowledgments
 
 - [Next.js](https://nextjs.org/)
 - [Payload CMS](https://payloadcms.com/)
-- [Vercel](https://vercel.com/)
+- [act CLI tool](https://github.com/nektos/act) for local GitHub Actions testing
