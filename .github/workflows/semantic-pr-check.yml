@@ -35,7 +35,7 @@ jobs:
             echo "feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert"
             echo "Example: feat: new feature"
             echo "Example: fix!: breaking bug fix"
-            echo "See CONTRIBUTING.md for more details on commit message format."
+            echo "See the README for more details on commit message format."
             exit 1
           fi
           
