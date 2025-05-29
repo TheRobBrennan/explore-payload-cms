@@ -1,0 +1,49 @@
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: payload-postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: payloadcms
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - payload-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  payload:
+    image: node:20-alpine
+    container_name: payload-cms
+    working_dir: /app
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./apps/payloadcms:/app
+      - payload_node_modules:/app/node_modules
+    environment:
+      PAYLOAD_SECRET: 3aca550d7c27a44b5e76abad
+      DATABASE_URI: postgres://postgres:postgres@postgres:5432/payloadcms
+      NEXT_PUBLIC_SERVER_URL: http://localhost:3000
+      NODE_ENV: development
+    command: sh -c "npm install -g pnpm && pnpm install && pnpm dev"
+    networks:
+      - payload-network
+
+networks:
+  payload-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  payload_node_modules:

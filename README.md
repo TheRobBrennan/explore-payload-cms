@@ -6,6 +6,7 @@ This project focuses primarily on Next.js and Payload CMS - designed to explore 
 
 - **Next.js 15** with App Router
 - **Payload CMS** for content management
+- **PostgreSQL** database (Dockerized)
 - TypeScript support
 - GitHub Actions workflows
 - Automated testing with [act CLI](https://github.com/nektos/act)
@@ -14,8 +15,8 @@ This project focuses primarily on Next.js and Payload CMS - designed to explore 
 ## 🛠️ Prerequisites
 
 - Node.js 20.0.0 or later
-- npm
-- [Docker Desktop](https://www.docker.com/products/docker-desktop/) (required for local workflow testing)
+- npm or pnpm
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/) (required for the local development environment - both Payload CMS Next.js app and PostgreSQL database)
 - [act CLI tool](https://github.com/nektos/act) (for local workflow testing)
 
 ## 🚦 Getting Started
@@ -25,6 +26,40 @@ This project focuses primarily on Next.js and Payload CMS - designed to explore 
    ```bash
    git clone https://github.com/TheRobBrennan/explore-payload-cms.git
    cd explore-payload-cms
+   ```
+
+2. **Start the development environment**
+
+   ```bash
+   npm start
+   ```
+
+   This will:
+   - Start a PostgreSQL Docker container
+   - Start the Payload CMS in a Docker container
+   - Show logs from both containers in the terminal
+
+   Alternatively, to run in detached mode:
+
+   ```bash
+   npm run start:detached
+   ```
+
+3. **Clean start (if needed)**
+
+   ```bash
+   npm run start:clean
+   ```
+
+   This will:
+   - Remove all Docker volumes (database data)
+   - Rebuild the Docker images
+   - Start fresh containers
+
+4. **Stop the environment**
+
+   ```bash
+   npm run stop
    ```
 
 ## 🧪 Testing Workflows
