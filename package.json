@@ -13,6 +13,12 @@
   },
   "author": "Rob Brennan <rob@sploosh.ai>",
   "scripts": {
+    "start": "docker-compose up",
+    "start:detached": "docker-compose up -d",
+    "start:clean": "docker-compose down -v && docker-compose up --build",
+    "stop": "docker-compose down",
+    "dev:cms": "cd apps/payloadcms && pnpm dev",
+    "build:cms": "cd apps/payloadcms && pnpm build",
     "test": "npm run test:workflows",
     "test:workflows": "chmod +x .github/test-workflows.sh && .github/test-workflows.sh",
     "test:workflows:semantic": "act pull_request -e .github/test-data/pr-events/minor.json -W .github/workflows/semantic-pr-check.yml",
@@ -27,5 +33,6 @@
   },
   "engines": {
     "node": ">=20.0.0"
-  }
+  },
+  "packageManager": "pnpm@10.11.0+sha512.6540583f41cc5f628eb3d9773ecee802f4f9ef9923cc45b69890fb47991d4b092964694ec3a4f738a420c918a333062c8b925d312f42e4f0c263eb603551f977"
 }
