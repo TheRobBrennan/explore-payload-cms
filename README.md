@@ -6,6 +6,9 @@ This project focuses primarily on Next.js and Payload CMS - designed to explore 
 
 - **Next.js 15** with App Router
 - **Payload CMS** for content management
+  - Live preview functionality for real-time content editing
+  - Rich text editing with Lexical editor
+  - SEO fields and optimization
 - **PostgreSQL** database (Dockerized)
 - TypeScript support
 - GitHub Actions workflows
@@ -56,11 +59,44 @@ This project focuses primarily on Next.js and Payload CMS - designed to explore 
    - Rebuild the Docker images
    - Start fresh containers
 
-4. **Stop the environment**
+4. **Environment Variables Setup**
+
+   The project uses environment variables for configuration. Copy the `.env.example` file to `.env` in the `apps/payloadcms` directory:
+
+   ```bash
+   cp apps/payloadcms/.env.example apps/payloadcms/.env
+   ```
+
+   Important environment variables:
+   - `PAYLOAD_SECRET`: Used to encrypt JWT tokens
+   - `DATABASE_URI`: PostgreSQL connection string
+   - `NEXT_PUBLIC_SERVER_URL`: URL for the server
+   - `PREVIEW_SECRET`: Required for the live preview functionality
+
+5. **Stop the environment**
 
    ```bash
    npm run stop
    ```
+
+## 🔍 Live Preview Functionality
+
+This project showcases Payload CMS's powerful live preview functionality, allowing content editors to see changes in real-time as they edit.
+
+### Using Live Preview
+
+1. Navigate to the admin interface at [http://localhost:3000/admin](http://localhost:3000/admin)
+2. Create or edit a page or post
+3. The live preview panel will show your changes in real-time
+4. You can switch between different device views (mobile, tablet, desktop)
+
+### Troubleshooting Live Preview
+
+If the live preview shows "You are not allowed to preview this page", ensure:
+
+- The `PREVIEW_SECRET` environment variable is set in your `.env` file
+- You've restarted the Payload CMS container after making changes to environment variables
+- You're logged in as an authenticated user with appropriate permissions
 
 ## 🧪 Testing Workflows
 
