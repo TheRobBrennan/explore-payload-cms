@@ -45,3 +45,17 @@ yarn-error.log*
 
 # Typescript
 *.tsbuildinfo
+
+# Database volumes
+/mongo-data
+/postgres-data
+
+# App build files
+/apps/*/dist
+/apps/*/build
+/apps/*/.payload
+/apps/*/media
+/apps/*/node_modules
+
+# Generated files
+/apps/*/src/payload-types.ts
