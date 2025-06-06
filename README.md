@@ -71,8 +71,8 @@ This project focuses primarily on Next.js and Payload CMS - designed to explore 
    - `MONGODB_URI`: MongoDB connection string for the MongoDB instance
    - Port configuration:
      - `DEMO_PAYLOADCMS_2025_APP_PORT=3000`: Demo Payload CMS instance
-     - `PAYLOAD_CMS_MONGO_PORT=3001`: MongoDB-based Payload CMS instance
-     - `PAYLOAD_CMS_PORT=3002`: PostgreSQL-based Payload CMS instance
+     - `PAYLOAD_CMS_MONGO_APP_PORT=3001`: MongoDB-based Payload CMS instance
+     - `PAYLOAD_CMS_POSTGRES_APP_PORT=3002`: PostgreSQL-based Payload CMS instance
    - Server URLs:
      - `NEXT_PUBLIC_SERVER_URL_DEMO`: URL for the Demo instance
      - `NEXT_PUBLIC_SERVER_URL_MONGO`: URL for the MongoDB instance

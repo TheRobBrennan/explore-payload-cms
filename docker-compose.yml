@@ -8,7 +8,7 @@ services:
       postgres:
         condition: service_healthy
     ports:
-      - "${PAYLOAD_CMS_PORT:-3002}:3000"
+      - "${PAYLOAD_CMS_POSTGRES_APP_PORT:-3002}:3000"
     volumes:
       - ./apps/payload-postgres:/app
       - payload_postgres_node_modules:/app/node_modules
@@ -34,7 +34,7 @@ services:
       mongo:
         condition: service_healthy
     ports:
-      - "${PAYLOAD_CMS_MONGO_PORT:-3001}:3000"
+      - "${PAYLOAD_CMS_MONGO_APP_PORT:-3001}:3000"
     volumes:
       - ./apps/payload-mongo:/app
       - payload_mongo_node_modules:/app/node_modules
