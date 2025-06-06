@@ -61,5 +61,18 @@ act push -e .github/test-data/pr-events/merge-bot-signed.json -W .github/workflo
 cleanup_act_containers
 echo ""
 
+echo "🧼 Testing GHCR Cleanup workflow..."
+echo ""
+
+echo "1. Testing dry run mode..."
+act workflow_dispatch -e .github/test-data/pr-events/ghcr-cleanup-dry-run.json -W .github/workflows/ghcr-cleanup.yml --container-architecture linux/amd64 -s GITHUB_TOKEN="test-token"
+cleanup_act_containers
+echo ""
+
+echo "2. Testing with custom parameters..."
+act workflow_dispatch -e .github/test-data/pr-events/ghcr-cleanup-custom.json -W .github/workflows/ghcr-cleanup.yml --container-architecture linux/amd64 -s GITHUB_TOKEN="test-token"
+cleanup_act_containers
+echo ""
+
 # Final cleanup to ensure no containers are left behind
 cleanup_act_containers
