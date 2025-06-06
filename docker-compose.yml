@@ -16,7 +16,7 @@ services:
     environment:
       PAYLOAD_SECRET: ${PAYLOAD_SECRET:-payload-cms-secret-key}
       DATABASE_URI: ${DATABASE_URI:-postgres://postgres:postgres-password@postgres:5432/payloadcms}
-      NEXT_PUBLIC_SERVER_URL: ${NEXT_PUBLIC_SERVER_URL:-http://localhost:3000}
+      NEXT_PUBLIC_SERVER_URL: ${NEXT_PUBLIC_SERVER_URL_POSTGRES_APP:-http://localhost:3002}
       PREVIEW_SECRET: ${PREVIEW_SECRET:-payload-cms-preview-secret}
       NODE_ENV: development
     command: sh -c "npm install -g pnpm && pnpm install && pnpm dev"
@@ -42,7 +42,7 @@ services:
     environment:
       PAYLOAD_SECRET: ${PAYLOAD_SECRET:-payload-cms-secret-key}
       MONGODB_URI: ${MONGODB_URI:-mongodb://mongo:mongo-password@mongo:27017/payloadcms?authSource=admin}
-      NEXT_PUBLIC_SERVER_URL: ${NEXT_PUBLIC_SERVER_URL_MONGO:-http://localhost:3001}
+      NEXT_PUBLIC_SERVER_URL: ${NEXT_PUBLIC_SERVER_URL_MONGO_APP:-http://localhost:3001}
       NODE_ENV: development
     command: sh -c "npm install -g pnpm && pnpm install && pnpm dev"
     networks:
@@ -67,7 +67,7 @@ services:
     environment:
       PAYLOAD_SECRET: ${PAYLOAD_SECRET:-payload-cms-secret-key}
       DATABASE_URI: ${DATABASE_URI:-postgres://postgres:postgres-password@postgres:5432/payloadcms}
-      NEXT_PUBLIC_SERVER_URL: ${NEXT_PUBLIC_SERVER_URL_DEMO:-http://localhost:3002}
+      NEXT_PUBLIC_SERVER_URL: ${NEXT_PUBLIC_SERVER_URL_DEMO_PAYLOADCMS_2025_APP:-http://localhost:3000}
       PREVIEW_SECRET: ${PREVIEW_SECRET:-payload-cms-preview-secret}
       NODE_ENV: development
     command: sh -c "npm install -g pnpm && pnpm install && pnpm dev"

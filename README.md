@@ -74,9 +74,9 @@ This project focuses primarily on Next.js and Payload CMS - designed to explore 
      - `PAYLOAD_CMS_MONGO_APP_PORT=3001`: MongoDB-based Payload CMS instance
      - `PAYLOAD_CMS_POSTGRES_APP_PORT=3002`: PostgreSQL-based Payload CMS instance
    - Server URLs:
-     - `NEXT_PUBLIC_SERVER_URL_DEMO`: URL for the Demo instance
-     - `NEXT_PUBLIC_SERVER_URL_MONGO`: URL for the MongoDB instance
-     - `NEXT_PUBLIC_SERVER_URL`: URL for the PostgreSQL instance
+     - `NEXT_PUBLIC_SERVER_URL_DEMO_PAYLOADCMS_2025_APP`: URL for the Demo instance
+     - `NEXT_PUBLIC_SERVER_URL_MONGO_APP`: URL for the MongoDB instance
+     - `NEXT_PUBLIC_SERVER_URL_POSTGRES_APP`: URL for the PostgreSQL instance
    - `PREVIEW_SECRET`: Required for the live preview functionality
 
 5. **Stop the environment**
