@@ -66,7 +66,9 @@ apps/*/media
 # Generated files
 /apps/*/src/payload-types.ts
 /apps/*/src/payload-generated-schema.ts
-/apps/*/src/migrations
+# Migrations are ignored but the directory is needed for production deployments
+/apps/*/src/migrations/*
+!/apps/*/src/migrations/.gitkeep
 
 # Lock files (keep only root lock file)
 apps/*/pnpm-lock.yaml
