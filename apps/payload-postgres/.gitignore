@@ -2,8 +2,6 @@
 /node_modules
 /.pnp
 .pnp.js
-apps/*/node_modules
-apps/*/.pnpm-store
 
 # Testing
 /coverage
@@ -11,13 +9,10 @@ apps/*/.pnpm-store
 # Next.js
 /.next/
 /out/
-apps/*/.next
 
 # Production
 /build
 /dist
-apps/*/build
-apps/*/dist
 
 # Misc
 .DS_Store
@@ -32,8 +27,6 @@ pnpm-debug.log*
 # Local env files
 .env*.local
 .env
-apps/*/.env
-apps/*/.env.local
 
 # IDE
 .idea
@@ -41,16 +34,11 @@ apps/*/.env.local
 *.swp
 *.swo
 
-# Local Netlify folder
-.netlify
-
 # Payload
 /payload-cache
 /payload.log
-apps/*/.payload
-apps/*/payload-cache
-apps/*/payload.log
-apps/*/media
+/media
+/public/media
 
 # Local development
 .turbo
@@ -58,14 +46,8 @@ apps/*/media
 
 # Typescript
 *.tsbuildinfo
-
-# Database volumes
-/mongo-data
-/postgres-data
+next-env.d.ts
 
 # Generated files
-/apps/*/src/payload-types.ts
-/apps/*/src/payload-generated-schema.ts
-
-# Lock files (keep only root lock file)
-apps/*/pnpm-lock.yaml
+/src/payload-types.ts
+/src/generated-schema.graphql
