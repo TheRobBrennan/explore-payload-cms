@@ -66,6 +66,7 @@ apps/*/media
 # Generated files
 /apps/*/src/payload-types.ts
 /apps/*/src/payload-generated-schema.ts
+/apps/*/src/migrations
 
 # Lock files (keep only root lock file)
 apps/*/pnpm-lock.yaml
