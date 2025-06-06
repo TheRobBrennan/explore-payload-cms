@@ -2,6 +2,8 @@
 /node_modules
 /.pnp
 .pnp.js
+apps/*/node_modules
+apps/*/.pnpm-store
 
 # Testing
 /coverage
@@ -9,9 +11,13 @@
 # Next.js
 /.next/
 /out/
+apps/*/.next
 
 # Production
 /build
+/dist
+apps/*/build
+apps/*/dist
 
 # Misc
 .DS_Store
@@ -21,10 +27,13 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
 
 # Local env files
 .env*.local
 .env
+apps/*/.env
+apps/*/.env.local
 
 # IDE
 .idea
@@ -38,6 +47,10 @@ yarn-error.log*
 # Payload
 /payload-cache
 /payload.log
+apps/*/.payload
+apps/*/payload-cache
+apps/*/payload.log
+apps/*/media
 
 # Local development
 .turbo
@@ -45,3 +58,17 @@ yarn-error.log*
 
 # Typescript
 *.tsbuildinfo
+
+# Database volumes
+/mongo-data
+/postgres-data
+
+# Generated files
+/apps/*/src/payload-types.ts
+/apps/*/src/payload-generated-schema.ts
+# Migrations are ignored but the directory is needed for production deployments
+/apps/*/src/migrations/*
+!/apps/*/src/migrations/.gitkeep
+
+# Lock files (keep only root lock file)
+apps/*/pnpm-lock.yaml

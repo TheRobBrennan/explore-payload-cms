@@ -1,0 +1,13 @@
+# Configuration for GitHub Actions linter
+# This disables specific linting rules for GitHub Actions workflows
+
+# Disable specific warnings for GitHub Actions workflows
+ignore:
+  # Ignore context access warnings for secrets
+  - "Context access might be invalid"
+  - "Context access might be invalid: WEBHOOK_SECRET"
+  - "Context access might be invalid: NGROK_URL"
+
+# Disable specific rules
+rules:
+  context-access: off
