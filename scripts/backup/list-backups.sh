@@ -2,7 +2,7 @@
 
 # Script to list available PostgreSQL database backups
 
-BACKUP_DIR="../../backups"
+BACKUP_DIR="$(dirname "$(dirname "$(cd "$(dirname "$0")" && pwd)")")/backups"
 
 # Check if backup directory exists
 if [ ! -d "${BACKUP_DIR}" ]; then

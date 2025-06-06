@@ -5,7 +5,7 @@
 # Check if a backup file was specified
 if [ -z "$1" ] || [ "$1" == "--yes" ]; then
   # Get the latest backup file if none specified
-  BACKUP_DIR="../../backups"
+  BACKUP_DIR="$(dirname "$(dirname "$(cd "$(dirname "$0")" && pwd)")")/backups"
   LATEST_BACKUP=$(ls -t ${BACKUP_DIR}/postgres_backup_*.sql 2>/dev/null | head -1)
   
   if [ -z "${LATEST_BACKUP}" ]; then
@@ -39,8 +39,9 @@ fi
 echo "Restoring PostgreSQL database from backup: ${BACKUP_FILE}"
 
 # Get database credentials from .env file
-if [ -f "../../.env" ]; then
-  source <(grep -v '^#' ../../.env | sed -E 's/(.*)=(.*)$/export \1="\2"/g')
+ENV_FILE="$(dirname "$(dirname "$(cd "$(dirname "$0")" && pwd)")")/\.env"
+if [ -f "${ENV_FILE}" ]; then
+  source <(grep -v '^#' "${ENV_FILE}" | sed -E 's/(.*)=(.*)$/export \1="\2"/g')
 else
   echo "Error: .env file not found!"
   exit 1

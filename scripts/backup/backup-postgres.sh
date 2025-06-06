@@ -4,7 +4,7 @@
 
 # Get current date and time for the backup filename
 TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
-BACKUP_DIR="../../backups"
+BACKUP_DIR="$(dirname "$(dirname "$(cd "$(dirname "$0")" && pwd)")")/backups"
 BACKUP_FILE="${BACKUP_DIR}/postgres_backup_${TIMESTAMP}.sql"
 
 # Ensure backup directory exists
@@ -13,8 +13,9 @@ mkdir -p ${BACKUP_DIR}
 echo "Creating PostgreSQL database backup..."
 
 # Get database credentials from .env file
-if [ -f "../../.env" ]; then
-  source <(grep -v '^#' ../../.env | sed -E 's/(.*)=(.*)$/export \1="\2"/g')
+ENV_FILE="$(dirname "$(dirname "$(cd "$(dirname "$0")" && pwd)")")/\.env"
+if [ -f "${ENV_FILE}" ]; then
+  source <(grep -v '^#' "${ENV_FILE}" | sed -E 's/(.*)=(.*)$/export \1="\2"/g')
 else
   echo "Error: .env file not found!"
   exit 1
