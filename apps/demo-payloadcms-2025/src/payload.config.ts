@@ -21,8 +21,8 @@ const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 // Email configuration constants
-const DEFAULT_EMAIL_FROM_NAME = 'NativeBio Website'
-const DEFAULT_EMAIL_FROM_ADDRESS = 'nomail@nativebio.org'
+const DEFAULT_EMAIL_FROM_NAME = 'Demo PayloadCMS Website'
+const DEFAULT_EMAIL_FROM_ADDRESS = 'nomail@nomail.org'
 
 // Custom email transport that logs to console
 const createMockTransport = () => ({

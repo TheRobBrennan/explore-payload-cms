@@ -12,6 +12,11 @@ This project focuses primarily on Next.js and Payload CMS - designed to explore 
 - **Database Options**:
   - PostgreSQL (Dockerized)
   - MongoDB (Dockerized)
+- **Docker Optimizations**:
+  - Optimized multi-stage builds
+  - Container security enhancements
+  - Health checks and monitoring
+  - Improved Docker Compose configuration
 - TypeScript support
 - GitHub Actions workflows
 - Automated testing with [act CLI](https://github.com/nektos/act)
@@ -143,6 +148,34 @@ This project includes GitHub Actions workflows that can be tested locally using 
 - `npm run test:workflows:semantic:patch` - Test semantic PR check with patch version bump
 - `npm run test:workflows:semantic:invalid` - Test semantic PR check with invalid PR title
 - `npm run test:workflows:merge` - Test merge workflow
+
+## 🐳 Docker Enhancements
+
+This project includes several Docker optimizations and improvements to enhance development and deployment experience:
+
+### Optimized Multi-stage Builds
+
+- Reduced image sizes for faster downloads and deployments
+- Improved build performance with efficient layer caching
+- Better layer organization for faster rebuilds during development
+
+### Container Security
+
+- Non-root user execution for all application containers
+- Proper file permissions to follow security best practices
+- Timezone configuration for consistent logging and scheduling
+
+### Health Checks
+
+- Added `/api/health` endpoints to all applications
+- Implemented Docker health check configuration for better orchestration
+- Improved container startup sequencing and dependency management
+
+### Docker Compose Improvements
+
+- Better service dependency management
+- Consistent environment variable handling across services
+- Container restart policies for improved reliability
 
 ## 🤖 GitHub Actions
 

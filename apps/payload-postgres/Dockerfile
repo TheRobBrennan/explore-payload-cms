@@ -1,24 +1,67 @@
-# To use this Dockerfile, you have to set `output: 'standalone'` in your next.config.js file.
-# From https://github.com/vercel/next.js/blob/canary/examples/with-docker/Dockerfile
+# Optimized multi-stage build for Payload CMS with PostgreSQL
 
-FROM node:18-alpine
+# Use a smaller Node.js base image
+FROM node:20-alpine AS base
+# Combine RUN commands to reduce layers
+RUN apk add --no-cache python3 make g++ libc6-compat && \
+    corepack enable pnpm
 
+# Dependencies stage - focused on efficient caching
+FROM base AS deps
 WORKDIR /app
 
-# Install dependencies
+# Copy only package files for better layer caching
 COPY package.json pnpm-lock.yaml* ./
-RUN apk add --no-cache python3 make g++ libc6-compat
-RUN corepack enable pnpm && pnpm install --frozen-lockfile
 
-# Copy application code
+# Install all dependencies (production + dev for build)
+RUN pnpm install --frozen-lockfile
+
+# Source files stage - prepare application code
+FROM base AS source
+WORKDIR /app
+
+# Accept DATABASE_URI as a build argument
+ARG DATABASE_URI
+ENV DATABASE_URI=${DATABASE_URI}
+
+# Copy all source code and configuration files
 COPY . .
 
-# Set environment variables
+# Production stage - minimal image with only what's needed to run
+FROM base AS runner
+WORKDIR /app
+
+# Set runtime environment variables
 ENV NODE_ENV=development
 ENV NEXT_TELEMETRY_DISABLED=1
+ENV PAYLOAD_SECRET=payload-cms-secret-key
 
-# Expose the application port
+# Create a non-root user to run the application
+RUN addgroup --system --gid 1001 nodejs && \
+    adduser --system --uid 1001 nextjs --ingroup nodejs && \
+    apk add --no-cache \
+    curl \
+    openssl \
+    tzdata && \
+    cp /usr/share/zoneinfo/America/Los_Angeles /etc/localtime && \
+    echo "America/Los_Angeles" > /etc/timezone
+
+# Copy necessary files from previous stages
+COPY --from=source --chown=nextjs:nodejs /app ./
+
+# Copy dependencies
+COPY --from=deps --chown=nextjs:nodejs /app/node_modules ./node_modules
+
+# Create required directories and set permissions
+RUN mkdir -p /app/src/migrations /app/public/media /app/.next && \
+    chown -R nextjs:nodejs /app && \
+    chmod -R 777 /app/.next
+
+# Set the user to run the application
+USER nextjs
+
+# Expose the port the app will run on
 EXPOSE 3000
 
-# Start the application
+# Command to run the application
 CMD ["pnpm", "dev"]
