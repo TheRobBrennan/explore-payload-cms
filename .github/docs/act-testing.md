@@ -1,6 +1,6 @@
 # ACT Testing and Container Management
 
-This document explains how the ACT testing framework is used in the NativeBio project and how we manage Docker containers created during testing.
+This document explains how the ACT testing framework is used in other projects and how we manage Docker containers created during testing.
 
 ## Overview
 
