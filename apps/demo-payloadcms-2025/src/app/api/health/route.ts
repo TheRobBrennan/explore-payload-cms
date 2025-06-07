@@ -10,7 +10,7 @@ export async function GET() {
     timestamp: new Date().toISOString(),
     version: process.env.NEXT_PUBLIC_APP_VERSION || 'development',
     environment: process.env.NODE_ENV,
-    service: 'nativebio-web-2025',
+    service: 'demo-payloadcms-2025',
   };
 
   return NextResponse.json(healthInfo, { status: 200 });
