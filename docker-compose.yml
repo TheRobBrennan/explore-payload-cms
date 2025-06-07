@@ -1,9 +1,13 @@
 services:
   # Main Payload CMS application with PostgreSQL
   payload-postgres:
-    image: node:20-alpine
     container_name: payload-postgres
-    working_dir: /app
+    build:
+      context: ./apps/payload-postgres
+      dockerfile: Dockerfile
+      args:
+        DATABASE_URI: "postgres://postgres:${POSTGRES_PASSWORD:-postgres-password}@postgres:5432/payloadcms"
+    restart: unless-stopped
     depends_on:
       postgres:
         condition: service_healthy
@@ -19,7 +23,13 @@ services:
       NEXT_PUBLIC_SERVER_URL: ${NEXT_PUBLIC_SERVER_URL_POSTGRES_APP:-http://localhost:3002}
       PREVIEW_SECRET: ${PREVIEW_SECRET:-payload-cms-preview-secret}
       NODE_ENV: development
-    command: sh -c "npm install -g pnpm && pnpm install && pnpm dev"
+      TZ: America/Los_Angeles
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
     networks:
       - payload-network
     extra_hosts:
@@ -27,9 +37,11 @@ services:
 
   # Example Payload CMS with MongoDB
   payload-mongo:
-    image: node:20-alpine
     container_name: payload-mongo
-    working_dir: /app
+    build:
+      context: ./apps/payload-mongo
+      dockerfile: Dockerfile
+    restart: unless-stopped
     depends_on:
       mongo:
         condition: service_healthy
@@ -44,7 +56,13 @@ services:
       MONGODB_URI: ${MONGODB_URI:-mongodb://mongo:mongo-password@mongo:27017/payloadcms?authSource=admin}
       NEXT_PUBLIC_SERVER_URL: ${NEXT_PUBLIC_SERVER_URL_MONGO_APP:-http://localhost:3001}
       NODE_ENV: development
-    command: sh -c "npm install -g pnpm && pnpm install && pnpm dev"
+      TZ: America/Los_Angeles
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
     networks:
       - payload-network
     extra_hosts:
@@ -52,9 +70,13 @@ services:
 
   # Demo PayloadCMS 2025 Application
   demo-payloadcms-2025:
-    image: node:20-alpine
     container_name: demo-payloadcms-2025
-    working_dir: /app
+    build:
+      context: ./apps/demo-payloadcms-2025
+      dockerfile: Dockerfile
+      args:
+        DATABASE_URI: "postgres://postgres:${POSTGRES_PASSWORD:-postgres-password}@postgres:5432/payloadcms"
+    restart: unless-stopped
     depends_on:
       postgres:
         condition: service_healthy
@@ -70,7 +92,13 @@ services:
       NEXT_PUBLIC_SERVER_URL: ${NEXT_PUBLIC_SERVER_URL_DEMO_PAYLOADCMS_2025_APP:-http://localhost:3000}
       PREVIEW_SECRET: ${PREVIEW_SECRET:-payload-cms-preview-secret}
       NODE_ENV: development
-    command: sh -c "npm install -g pnpm && pnpm install && pnpm dev"
+      TZ: America/Los_Angeles
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
     networks:
       - payload-network
     extra_hosts:
